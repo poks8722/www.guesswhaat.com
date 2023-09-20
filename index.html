@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Sections Website</title>
+    <style>
+        /* Style for the first section */
+        .section0 {
+            background-color: #FF739C;
+            padding: 10px;
+            text-align: center;
+        }
+        .section1 {
+            background-color: #15EAEA;
+            padding: 10px;
+            text-align: center;
+        }
+        #timer {
+        font-size: 24px; /* Adjust font size as needed */
+        margin: 10px 0;
+        }
+        #best-time {
+            font-size: 24px; /* Adjust font size as needed */
+        }
+        .circle {
+            width: 200px;
+            height: 200px;
+            background-color: #FF739C;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            line-height: 200px
+        }
+
+        /* Style for the second section */
+        .section2 {
+            background-color: #FF739C;
+            padding: 20px;
+            display: flex;
+            height: 600px;
+        }
+
+        .rectangle-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rectangle {
+            width: 300px;
+            height: 100px;
+            background-color: #15EAEA;
+            margin: 10px;
+            border-radius: 20px;
+            float: left;
+            text-align: left;
+            line-height: 60px;
+        }
+        .rectangle input[type="text"] {
+            width: 300px;
+            height: 100px;; 
+            background-color: transparent; 
+            box-sizing: border-box; 
+            padding: 10px; /* Add padding to the input */
+            font-size: 16px; /* Adjust font size as needed */
+            border-radius: 20px; /* Keep the input rounded corners */
+            position: relative;
+        }
+        .submit {
+            width: 300px;
+            height: 80px;
+            background-color: #15EAEA;
+            margin: 10px;
+            border-radius: 25%;
+        }
+        .menu {
+            width: 540px;
+            height: 250px;
+            background-color: #15EAEA;
+            border-radius: 20px;
+            margin: 10px;
+            position:absolute;
+            top: 300px;
+            right: 30px;
+            text-align: center;
+            line-height: 100px;
+        }
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .themes {
+            width: 500px;
+            height: 250px;
+            background-color: #15EAEA;
+            border-radius: 20px;
+            margin: 10px;
+            position:absolute;
+            top: 600px;
+            right: 30px;
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: space-between; 
+            padding: 20px; 
+        }
+        .theme-text {
+            cursor: pointer;
+            font-size: 20px;
+            margin: 10px;
+            padding: 10px;
+            transition: background-color 0.3s ease-in-out;
+            text-align: center;
+        }
+        .theme-text:hover {
+        background-color: #6dd5ed;
+        color: #fff; 
+        cursor: pointer;
+        }
+        .ptheme {
+            position: absolute;
+            top: 13%;
+            left: 54%;
+            font-size: 30px;
+        }
+        .themes-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            grid-gap: 20px; /* Spacing between themes */
+        }
+        .GameTitle {
+            text-align: center;
+            position: absolute;
+            top: 30%;
+            right: 40%;
+        }
+        h2{
+            font-size: 60px;
+        }
+        #startButton {
+            padding: 10px 20px;
+            background-color: #6dd5ed;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+            top: 85%;
+            right : 50%;
+            border-radius: 20px;
+
+        }
+        #startButton:hover {
+            background-color: #4ab3d0;
+        }
+        #submitButton {
+            padding: 10px 20px;
+            background-color: #6dd5ed;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+            top: 85%;
+            right: 88%;
+            border-radius: 20px;
+
+        }
+        #submitButton:hover {
+            background-color: #4ab3d0;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="section0"></div>
+    <div class="section1">
+        <div class="circle" id="circ1">1</div>
+        <div class="circle" id="circ2">2</div>
+        <div class="circle" id="circ3">3</div>
+        <div class="circle" id="circ4">4</div>
+    </div>
+    
+    <div class="section2">
+        <div class="rectangle-container">
+            <div class="rectangle" id="rect1"> 
+                <input type="text" placeholder="Enter Answer for circle 1" id="ans1">
+            </div>
+            <div class="rectangle" id="rect2"> 
+                <input type="text" placeholder="Enter Answer for circle 2" id="ans2">
+            </div>
+            <div class="rectangle" id="rect3"> 
+                <input type="text" placeholder="Enter Answer for circle 3" id="ans3">
+            </div>
+            <div class="rectangle" id="rect4"> 
+                <input type="text" placeholder="Enter Answer for circle 4" id="ans4">
+            </div>
+            <button id="submitButton">Submit</button>
+            <button id="startButton">Start Game</button>    
+        </div>
+        
+        <div class="menu">
+            <div id="timer">Timer: 00:00</div>
+            <div id="best-time">Best Time: N/A</div>
+        </div>
+        
+        <div class="themes">
+            <div class ="ptheme">
+                <h3>Select Theme</h3>
+                <h3>(press a theme)</h3>
+            </div>
+            <div class="themes-container">
+                <p class="theme-text" data-theme="anime">Anime</p>
+                <p class="theme-text" data-theme="tvshow">TV Show</p>
+                <p class="theme-text" data-theme="movies">Movies</p>
+                <p class="theme-text" data-theme="books">Books</p>
+            </div>
+        </div>
+
+    <div class ="GameTitle">
+        <h2> Guess What</h2>
+        <h2> >_0 </h2>
+        <h2> By </h2>
+        <h2> Ralph Daniel Nicolas </h2>
+    </div>
+
+    <script>
+        let timerInterval;
+        let seconds = 0;
+        let isTimerRunning = false;
+        let bestTime = null;
+
+        const timerElement = document.getElementById('timer');
+        const startButton = document.getElementById('startButton');
+        const submitButton = document.getElementById('submitButton');
+        const themes = {
+            anime: ["I have no enemies", "I alone am the honored one", "I will become the hokage", "I will become the pirate king"],
+            tvshow: ["Winter is coming", "Bazinga", "I'm Pickle Rick.", "I am the one who knocks",],
+            movies: ["You shall not pass", "Long live the king", "May the force be with you", "I'm the king of the world!"],
+            books: ["Call me Ishmael", "All was well", "So it goes", "it is finished",],
+        };
+        
+        const themeData = {
+            anime: [
+        { phrase: "I have no enemies", source: "Vinland Saga" },
+        { phrase: "I alone am the honored one", source: "Jujutsu Kaisen" },
+        { phrase: "I will become the hokage", source: "Naruto" },
+        { phrase: "I will become the pirate king", source: "One Piece" }    
+    ],
+    tvshow: [
+        { phrase: "Winter is coming", source: "Game of thrones" },
+        { phrase: "Bazinga", source: "The Big bang theory" },
+        { phrase: "I'm Pickle Rick.", source: "Rick and morty" },
+        { phrase: "I am the one who knocks", source: "Breaking bad" }
+    ],
+    movies: [
+        { phrase: "You shall not pass", source: "The Lord of the rings" },
+        { phrase: "Long live the king", source: "Lion King" },
+        { phrase: "I'm the king of the world!", source: "Titanic" },
+        { phrase: "May the force be with you", source: "Star wars" }
+    ],
+    books: [
+        { phrase: "Call me Ishmael", source: "Moby Dick" },
+        { phrase: "All was well", source: "Harry Potter" },
+        { phrase: "So it goes", source: "Slaughterhouse Five" },
+        { phrase: "it is finished", source: "Bible" }
+    ],
+};
+const answers = [
+    {
+        theme: "anime",
+        phrases: ["Vinland Saga", "Jujutsu Kaisen","jjk", "Naruto", "One Piece"],
+    },
+    {
+        theme: "tvshow",
+        phrases: ["Game of Thrones", "got", "The Big Bang Theory","big bang theory", "Rick and Morty", "Breaking Bad"],
+    },
+    {
+        theme: "movies",
+        phrases: ["The Lord of the Rings","lord of the rings", "Lion King", "Titanic", "Star Wars"],
+    },
+    {
+        theme: "books",
+        phrases: ["Moby Dick", "Harry Potter", "Slaughterhouse-Five","slaugherhouse 5",  "Bible"],
+    },
+];
+
+        
+        function updateTimer() {
+            seconds++;
+            const minutes = Math.floor(seconds / 60);
+         const remainingSeconds = seconds % 60;
+            const formattedTime = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+            timerElement.textContent = `Timer: ${formattedTime}`;
+        }
+        
+        function formatTime(timeInSeconds) {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+        startButton.addEventListener('click', function () {
+            if (!isTimerRunning) {
+                clearInterval(timerInterval);
+                timerInterval = setInterval(updateTimer, 1000);
+                isTimerRunning = true;
+                seconds = 0;
+
+            }
+        });
+
+        submitButton.addEventListener('click', function () {
+            if (isTimerRunning) {
+                // Stop the timer if it's running
+                clearInterval(timerInterval);
+                isTimerRunning = false;
+                
+                const totalTime = seconds;
+            if (bestTime === null || totalTime < bestTime) {
+                bestTime = totalTime;
+                document.getElementById('best-time').textContent = `Best Time: ${formatTime(totalTime)}`;
+  
+        }
+            }
+            
+            const enteredAnswers = [
+            document.getElementById('ans1').value.toLowerCase(),
+            document.getElementById('ans2').value.toLowerCase(),
+            document.getElementById('ans3').value.toLowerCase(),
+            document.getElementById('ans4').value.toLowerCase()
+        ];
+
+        let correctCount = 0;
+
+        for (let i = 0; i < enteredAnswers.length; i++) {
+            const enteredAnswer = enteredAnswers[i];
+
+            for (const theme of answers) {
+                const found = theme.phrases.some(phrase => phrase.toLowerCase() === enteredAnswer);
+
+                if (found) {
+                    correctCount++;
+                    break; // Move to the next entered answer
+                }
+            }
+        }
+
+        if (correctCount === 4) {
+            alert("Congratulations! All answers are correct.");
+        } else if (correctCount === 0) {
+            alert("Sorry, all answers are incorrect.");
+        } else {
+            alert(`You got ${correctCount} answers correct out of 4.`);
+        }
+        });
+
+        const themeTexts = document.querySelectorAll('.theme-text');
+        themeTexts.forEach(text => {
+        text.addEventListener('click', () => {
+        themeTexts.forEach(t => t.classList.remove('active'));
+        text.classList.add('active');
+        const selectedTheme = text.getAttribute('data-theme');
+        changeTheme(selectedTheme);
+    });
+});
+        
+
+        
+        function changeTheme(selectedTheme) {
+
+            const circles = document.querySelectorAll('.circle');
+            if (themes[selectedTheme].length === 0) {
+        themes[selectedTheme] = originalThemes[selectedTheme].slice(); 
+    }
+            circles.forEach(circle => {
+                const randomIndex = Math.floor(Math.random() * themes[selectedTheme].length);
+                const randomPhrase = themes[selectedTheme].splice(randomIndex, 1)[0]; // Remove and use the phrase
+                circle.textContent = randomPhrase;
+    });
+}
+
+        function generateRandomPhrases() {
+            const circles = document.querySelectorAll('.circle');
+            const selectedTheme = document.getElementById('theme-select').value;
+
+            circles.forEach(circle => {
+                const randomIndex = Math.floor(Math.random() * themes[selectedTheme].length);
+                const randomPhrase = themes[selectedTheme][randomIndex];
+                circle.textContent = randomPhrase; // Set the text content of the circle
+    });
+        }
+
+        function handleThemeChange() {
+            const selectedTheme = document.getElementById('theme-select').value;
+        }
+
+        function handleSubmitClick() {
+            console.log("Submit button clicked");
+            const text1 = document.getElementById('ans1').value;
+            const text2 = document.getElementById('ans2').value;
+            const text3 = document.getElementById('ans3').value;
+            const text4 = document.getElementById('ans4').value;
+
+            const totalTime = seconds;
+            if (bestTime === null || totalTime < bestTime) {
+            bestTime = totalTime;
+            document.getElementById('best-time').textContent = `Best Time: ${formatTime(totalTime)}`;
+        }
+        }
+        
+    
+document.getElementById('submitButton').addEventListener('click', function () {
+    formatTime();
+});
+    </script>
+</body>
+</html>
